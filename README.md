@@ -9,8 +9,8 @@ o mapeamento abordado foi só o que precisava se quiser se aprofundar mais a doc
 espero que o projeto seja util pra voce.
 
 links de ajuda:
-http://www.techferry.com/articles/hibernate-jpa-annotations.html
-http://www.devmedia.com.br/crud-completo-com-hibernate-e-jpa/32711
+http://www.techferry.com/articles/hibernate-jpa-annotations.html<br>
+http://www.devmedia.com.br/crud-completo-com-hibernate-e-jpa/32711<br>
 http://www.devmedia.com.br/configurando-hibernate-passo-a-passo/28652
 
 documentação java:
