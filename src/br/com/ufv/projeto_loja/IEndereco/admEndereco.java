@@ -11,7 +11,6 @@ import br.com.ufv.projeto_loja.Faceda.Fachada;
 public class admEndereco {
 	private static Scanner scanner = new Scanner(System.in);
 	public static List<Endereco> enderecoList = new ArrayList<Endereco>();
-	private static List<Endereco> end;
 
 
 	public static void menuEndereco(){
@@ -154,26 +153,11 @@ public class admEndereco {
 	public static List<Endereco> pegarEnderecos(){
 		return enderecoList;
 	}
-
-	public static List<Endereco> pegarEnderecosIdPessoa(int id){
-		end = null;
-		for(Endereco f : enderecoList){
-			if(f.getCliente().getIdPessoa() == id){
-				System.out.println(
-						  " Cod.: "   + f.getIdEndereco()
-						+ " Rua: "    + f.getRua()
-						+ " Numero: " + f.getNumero()
-						+ " Bairro: " + f.getBairro()
-						+ " Cidade: " + f.getCidade()
-						+ " Estado: " + f.getEstado()
-						+ " CEP: "	 + f.getCep()
-						+ " idPessoaCliente: "	 + f.getCliente().getIdPessoa()
-				);
-				
-				end.add(f);
-			}
-		}
-
-		return end;
+	@SuppressWarnings("unchecked")
+	public static List<Endereco> pegarEnderecosBD(){
+		List<Endereco> endList = new ArrayList<Endereco>();
+		endList = (List<Endereco>) Fachada.getInstance().listarEnderecos(Endereco.class);
+		return endList;
 	}
+
 }

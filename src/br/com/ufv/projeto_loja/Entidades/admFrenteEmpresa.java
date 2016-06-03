@@ -72,8 +72,33 @@ public class admFrenteEmpresa {
 							admProduto.controllerProduto();
 							break;
 						case 4://VENDA
+							System.out.println("*********CONTROLE VENDAS**********");
 							//mudar o status da venda
-							admVendas.controllerVenda();
+							boolean controlVenda = true;
+							boolean controlFlag = true;
+							do{
+								try {
+									System.out.println("    0 - Sair");
+									System.out.println("    1 - Mostrar Vendas");
+//									System.out.println("    1 - Alterar Status Venda");
+									int escVenda = scanner.nextInt();
+									switch(escVenda){
+										case 0:
+											controlVenda = false;
+											break;
+										case 1:
+											admVendas.mostrarVendas();
+											break;
+										default:
+											System.out.println("Erro - Opção Invalida");
+									}
+									controlFlag = false;
+								} catch (InputMismatchException e) {
+									System.out.println("Erro: "+ e.getMessage());
+								}catch(NullPointerException e){
+									System.out.println("Erro: "+ e.getMessage());
+								}
+							}while(controlFlag || controlVenda);
 							break;
 						default:
 							System.out.println("Erro - Opção Invalida!");
@@ -131,8 +156,7 @@ public class admFrenteEmpresa {
 			
 		
 	}
-	
-	
+		
 	//verifica usuario e senha
     @SuppressWarnings("unchecked")
 	public static boolean verificaCargoFuncBD(Funcionario f){

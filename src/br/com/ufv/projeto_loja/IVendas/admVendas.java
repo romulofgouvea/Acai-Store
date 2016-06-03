@@ -52,9 +52,9 @@ public class admVendas {
 								break;
 							}
 							System.out.println("Login realizado com Sucesso!");
-							int idPessoaCliente = (int) admCliente.pegarCliente(admCliente.getClienteLogado().getEmail()).getIdPessoa();
-							System.out.println("idPessoaCliente: " + idPessoaCliente);
-							vendas.setCodCliente(idPessoaCliente);
+							long idPessoaCliente = admCliente.pegarCliente(admCliente.getClienteLogado().getEmail()).getIdPessoa();
+							//System.out.println("idPessoaCliente: " + idPessoaCliente);
+							vendas.setCodCliente((int) idPessoaCliente);
 
 							//ADICIONAR ALGUM CODIGO DE FUNCIONARIO
 							int codFunc; 
@@ -94,11 +94,29 @@ public class admVendas {
 							boolean controlFlag = true;
 							do{
 								try {
-									int escEnd = 0;
-									List<Endereco> endCliente = admEndereco.pegarEnderecosIdPessoa(idPessoaCliente);
+									int escEnd = 1;
+									System.out.println("idPessoaCliente: " + idPessoaCliente);
+									List<Endereco> endCliente = admEndereco.pegarEnderecosBD();
+									
+									System.out.println("endCliente: " + endCliente.size());
+									for(Endereco e: endCliente){
+										if(e.getCliente().getIdPessoa() == idPessoaCliente){
+											System.out.println(""
+													+ " Cod.: "   + e.getIdEndereco()
+													+ " Rua: "    + e.getRua()
+													+ " Numero: " + e.getNumero()
+													+ " Bairro: " + e.getBairro()
+													+ " Cidade: " + e.getCidade()
+													+ " Estado: " + e.getEstado()
+													+ " CEP: "	 + e.getCep()
+											);
+										}
+									}
+
+									System.out.print("Cod.: ");
 									do{
 										escEnd = scanner.nextInt();	
-									}while(escEnd < 0 && escEnd > endCliente.size());
+									}while(escEnd < 1 || escEnd > endCliente.size());
 									
 									vendas.setIdEndereco(escEnd);
 									
@@ -113,7 +131,9 @@ public class admVendas {
 							vendas.setCodVenda(vendas.getCodVenda());//colocar randomico
 							vendas.setDataHora(meuCalendar.modficaData(1, 0, 0, 0));
 							vendas.setDataEntrega(meuCalendar.modficaData(1, (int) (meuCalendar.getDia() + 6), 0, 0));
-
+							vendas.setStatusVenda(1);
+							
+							
 							List<String> idprodutos = new  ArrayList<String>();
 							for(Produto p : admCesta.pegarProdCesta()){
 								idprodutos.add(p.getCodigo()+"");
@@ -183,16 +203,16 @@ public class admVendas {
 		do{
 			try {
 				vendasList = (List<Vendas>) Fachada.getInstance().listarVendas(Vendas.class);
-				System.out.println("Relatório");
+				System.out.println("Relatório de Vendas: ");
 				for(Vendas v: vendasList){
 					System.out.println(
-							"venda: Id:" + v.getIdVenda()
-							+ "Cod. Venda: " + v.getCodVenda()
-							+ "Cod. Cliente: " + v.getCodCliente()
-							+ "Cod. Funcionario:" + v.getCodFuncionario() 
-							+ "Data Venda: " + v.getDataHora() 
-							+ "Data Entrega" + v.getDataEntrega()
-							+ "Status Venda: " + statusVenda( v.getStatusVenda() )
+							" Id:" + v.getIdVenda()
+							+ " Cod. Venda: " + v.getCodVenda()
+							+ " Cod. Cliente: " + v.getCodCliente()
+							+ " Cod. Funcionario: " + v.getCodFuncionario() 
+							+ " Data Venda: " + v.getDataHora() 
+							+ " Data Entrega: " + v.getDataEntrega()
+							+ " Status Venda: " + statusVenda( v.getStatusVenda() )
 							);
 				}
 

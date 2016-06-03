@@ -33,6 +33,7 @@ public class admFrenteLoja {
 			if(admVendas.returnMenu){
 				produtoList.clear();
 				admVendas.returnMenu = false;
+				verPedidos = false;
 				return true;
 			}
 			MenuFrenteLoja();//CHAMA O MENU
@@ -107,7 +108,7 @@ public class admFrenteLoja {
 			default:
 				System.out.println("Erro - Digite entre 1 e 4 para escolher uma opção valida!");
 			}
-		}while((lerMenu < 1 && lerMenu > 2) || controllerFrenteLoja);
+		}while((lerMenu < 1 || lerMenu > 2) || controllerFrenteLoja);
 		return controllerFrenteLoja;
 	}
 
